@@ -1,21 +1,12 @@
 // reddit functions
-var getTopPosts = function (subreddit, time, n=10, callback) {
+var getTopPosts = async function (subreddit, time, n=10) {
   try {
     // Create URL
     var url = `https://www.reddit.com/r/${subreddit}/top/.json?t=${time}`;
     // Get JSON from top posts
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onload = function () {
-      if (this.status === 200) {
-        var res = JSON.parse(this.responseText);
-        callback(res.data.children);
-      }
-    };
-    xhr.onerror = function () {
-      console.log(`An error occurred in getting top posts from ${subreddit} with time ${time}.`);
-    }
-    xhr.send();
+    return await fetch(url).then(function (response) {
+      return response.json();
+    });
   } catch {
     console.log(`An error occurred in getting top posts from ${subreddit} with time ${time}.`);
   }
@@ -46,5 +37,3 @@ var getOrderedTopPostData = function (rawPosts) {
   });
   return output;
 };
-
-getTopPosts('music', 10, 10, getOrderedTopPostData);
