@@ -36,3 +36,12 @@ var extractAndOrderPostData = function (rawPosts) {
   });
   return output;
 };
+
+var removeFeatures = function (title) {
+  try {
+    return title.replace(/[\(\[](ft|feat).*[\)\]]/, '').trim();
+  } catch (err) {
+    console.log(err);
+    return title;
+  }
+};
