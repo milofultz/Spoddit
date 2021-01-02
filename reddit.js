@@ -54,3 +54,20 @@ var removeAmpersand = function (title) {
     return title;
   }
 };
+
+var removeText = function (title) {
+  try {
+    title = title.replace(/\(Extended\)|\(extended\)|\(Version\)|\(version\)/, '');
+    // Preserve title if this regex present
+    if (/[\(\[].*(VIP|Mix|mix|Dub|dub|Edit|edit)[\)\]]/.test(title)) {
+      return title.trim();
+    // Otherwise remove the parenthesized/bracketed text
+    } else {
+      return title.replace(/[\(\[].*[\)\]]/, '').trim();
+    }
+  } catch (err) {
+    console.log(err);
+    return title;
+  }
+};
+
