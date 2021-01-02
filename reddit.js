@@ -71,3 +71,12 @@ var removeText = function (title) {
   }
 };
 
+// Removes year within a set of parentheses or brackets
+var removeYear = function (title) {
+  try (
+    return title.replaceAll(/[\(\[]((19\d{2})|(20\d{2}))[\)\]]/g, "");
+  ) catch (err) {
+    console.log(err);
+    return title;
+  }
+}
