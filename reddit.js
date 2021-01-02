@@ -45,3 +45,12 @@ var removeFeatures = function (title) {
     return title;
   }
 };
+
+var removeAmpersand = function (title) {
+  try {
+    return title.replace(/&amp;/, '').trim();
+  } catch (err) {
+    console.log(err);
+    return title;
+  }
+};
