@@ -4,9 +4,9 @@ var getTopPosts = async function (subreddit, time, n=10) {
     // Create URL
     var url = `https://www.reddit.com/r/${subreddit}/top/.json?t=${time}`;
     // Get JSON from top posts
-    return await fetch(url).then(function (response) {
-      return response.json();
-    });
+    return await fetch(url)
+      .then(response => response.json())
+      .then(json => getOrderedTopPostData(json.data.children));
   } catch {
     console.log(`An error occurred in getting top posts from ${subreddit} with time ${time}.`);
   }
