@@ -90,3 +90,26 @@ var cleanPostTitle = function (title) {
     )
   );
 };
+
+var splitPostTitle = function (title) {
+  try {
+    if (/-/.test(title) && /^[^\n\r]+$/.test(title)) {
+      var [artist, title] = title.replace(/\s{2,}/, " ").split(/-/, 2);
+      return {
+        artist: artist.trim(),
+        title: title.trim()
+      }
+    } else {
+      return {
+        artist: null,
+        title: null
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    return {
+      artist: null,
+      title: null
+    }
+  }
+};
